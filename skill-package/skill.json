@@ -1,0 +1,60 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "name": "Marine Skill",
+          "summary": "Get marine weather, tide predictions, and NOAA buoy data via Alexa.",
+          "description": "Marine Skill provides real-time marine weather conditions, tide predictions, and NOAA buoy observations. Ask for current wind speed, wave heights, high and low tide times, and coastal forecast zone reports.",
+          "examplePhrases": [
+            "Alexa, open marine skill",
+            "Alexa, ask marine skill what is the marine weather",
+            "Alexa, ask marine skill when is high tide"
+          ],
+          "keywords": [
+            "marine",
+            "weather",
+            "tides",
+            "NOAA",
+            "nautical",
+            "sailing",
+            "boating",
+            "fishing",
+            "coastal"
+          ]
+        }
+      },
+      "isAvailableWorldwide": false,
+      "targetedRegions": ["NA_US"],
+      "category": "WEATHER",
+      "distributionMode": "PUBLIC",
+      "testingInstructions": "Enable the skill and say 'Alexa, open marine skill'. Ask for marine weather or tide times."
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda"
+        },
+        "interfaces": []
+      }
+    },
+    "permissions": [
+      {
+        "name": "alexa::devices:all:address:country_and_postal_code:read"
+      }
+    ],
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "usesPersonalInfo": false,
+      "isChildDirected": false,
+      "isExportCompliant": true,
+      "containsAds": false,
+      "locales": {
+        "en-US": {
+          "privacyPolicyUrl": "",
+          "termsOfUseUrl": ""
+        }
+      }
+    }
+  }
+}

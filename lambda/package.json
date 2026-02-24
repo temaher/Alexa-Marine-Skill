@@ -1,0 +1,12 @@
+{
+  "name": "alexa-marine-skill-lambda",
+  "version": "1.0.0",
+  "description": "Lambda function for the Alexa Marine Skill",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "ask-sdk-core": "^2.14.0",
+    "ask-sdk-model": "^1.86.0",
+    "axios": "^1.6.0"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "marine skill",
+      "intents": [
+        {
+          "name": "MarineWeatherIntent",
+          "slots": [
+            {
+              "name": "forecastZone",
+              "type": "NWS_ZONE"
+            },
+            {
+              "name": "stationId",
+              "type": "NOAA_STATION_ID"
+            }
+          ],
+          "samples": [
+            "what is the marine weather",
+            "what are current marine conditions",
+            "what are the conditions on the water",
+            "give me a marine weather report",
+            "what is the weather offshore",
+            "what are current conditions at station {stationId}",
+            "what is the wind speed",
+            "how windy is it",
+            "what are the wave conditions",
+            "get marine weather for zone {forecastZone}",
+            "marine forecast for {forecastZone}",
+            "coastal conditions for zone {forecastZone}"
+          ]
+        },
+        {
+          "name": "TidesIntent",
+          "slots": [
+            {
+              "name": "tideType",
+              "type": "TIDE_TYPE"
+            },
+            {
+              "name": "stationId",
+              "type": "NOAA_STATION_ID"
+            }
+          ],
+          "samples": [
+            "when is high tide",
+            "when is low tide",
+            "what time is {tideType} tide",
+            "what time is {tideType} tide today",
+            "give me tide predictions",
+            "what are today's tide times",
+            "what are the tides today",
+            "tide predictions for station {stationId}",
+            "when is the next high tide",
+            "when is the next low tide",
+            "tide schedule for today",
+            "what time does the tide change"
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "name": "TIDE_TYPE",
+          "values": [
+            { "name": { "value": "high", "synonyms": ["high tide", "flood"] } },
+            { "name": { "value": "low", "synonyms": ["low tide", "ebb"] } }
+          ]
+        },
+        {
+          "name": "NWS_ZONE",
+          "values": [
+            { "name": { "value": "ANZ335", "synonyms": ["New York Bight"] } },
+            { "name": { "value": "ANZ338", "synonyms": ["Long Island Sound"] } },
+            { "name": { "value": "ANZ430", "synonyms": ["Delaware Bay"] } },
+            { "name": { "value": "ANZ531", "synonyms": ["Chesapeake Bay"] } },
+            { "name": { "value": "AMZ630", "synonyms": ["Gulf of Maine"] } }
+          ]
+        },
+        {
+          "name": "NOAA_STATION_ID",
+          "values": [
+            { "name": { "value": "8443970", "synonyms": ["Boston"] } },
+            { "name": { "value": "8518750", "synonyms": ["The Battery", "New York"] } },
+            { "name": { "value": "8461490", "synonyms": ["New London", "Connecticut"] } },
+            { "name": { "value": "8534720", "synonyms": ["Atlantic City"] } },
+            { "name": { "value": "8638610", "synonyms": ["Sewells Point", "Norfolk"] } }
+          ]
+        }
+      ]
+    }
+  }
+}
