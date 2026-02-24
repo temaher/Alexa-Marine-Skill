@@ -1,5 +1,3 @@
-'use strict';
-
 const Alexa = require('ask-sdk-core');
 
 const SessionEndedRequestHandler = {
@@ -8,7 +6,7 @@ const SessionEndedRequestHandler = {
   },
 
   handle(handlerInput) {
-    const reason = handlerInput.requestEnvelope.request.reason;
+    const { reason } = handlerInput.requestEnvelope.request;
     console.log(`Session ended with reason: ${reason}`);
     // SessionEndedRequest must return an empty response
     return handlerInput.responseBuilder.getResponse();

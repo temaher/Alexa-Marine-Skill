@@ -1,5 +1,3 @@
-'use strict';
-
 const MarineWeatherHandler = require('../../lambda/handlers/MarineWeatherHandler');
 const noaaService = require('../../lambda/services/noaaService');
 const locationService = require('../../lambda/services/locationService');

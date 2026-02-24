@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * locationService.js
  *
@@ -20,13 +18,15 @@ const { DEFAULT_STATION_ID } = require('../constants');
  * @param {import('ask-sdk-core').HandlerInput} handlerInput
  * @returns {Promise<string>} NOAA station ID
  */
+// eslint-disable-next-line no-unused-vars
 async function getNearestStationId(handlerInput) {
   // TODO: Replace this placeholder with real Alexa Device Address API resolution.
   //
   // Step 1 — retrieve device address:
   //   const { deviceId } = handlerInput.requestEnvelope.context.System.device;
   //   const { apiEndpoint, apiAccessToken } = handlerInput.requestEnvelope.context.System;
-  //   const deviceAddressClient = handlerInput.serviceClientFactory.getDeviceAddressServiceClient();
+  //   const deviceAddressClient =
+  //     handlerInput.serviceClientFactory.getDeviceAddressServiceClient();
   //   const address = await deviceAddressClient.getCountryAndPostalCode(deviceId);
   //   // address: { countryCode: 'US', postalCode: '02101' }
   //

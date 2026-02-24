@@ -1,5 +1,3 @@
-'use strict';
-
 const { MESSAGES } = require('../constants');
 
 const ErrorHandler = {

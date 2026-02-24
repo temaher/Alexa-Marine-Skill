@@ -1,6 +1,6 @@
-'use strict';
-
-const { speak, pause, formatList, degreesToCardinal, sayWithUnit } = require('../../lambda/utils/speechUtils');
+const {
+  speak, pause, formatList, degreesToCardinal, sayWithUnit,
+} = require('../../lambda/utils/speechUtils');
 
 describe('speechUtils', () => {
   describe('speak', () => {

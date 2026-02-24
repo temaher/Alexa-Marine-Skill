@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Creates a minimal mock HandlerInput object suitable for testing handlers.
  *
@@ -13,16 +11,15 @@ function mockHandlerInput(requestType, intentName = '', slots = {}) {
     Object.entries(slots).map(([name, value]) => [name, { name, value }]),
   );
 
-  const request =
-    requestType === 'IntentRequest'
-      ? {
-          type: 'IntentRequest',
-          intent: {
-            name: intentName,
-            slots: formattedSlots,
-          },
-        }
-      : { type: requestType, reason: 'USER_INITIATED' };
+  const request = requestType === 'IntentRequest'
+    ? {
+      type: 'IntentRequest',
+      intent: {
+        name: intentName,
+        slots: formattedSlots,
+      },
+    }
+    : { type: requestType, reason: 'USER_INITIATED' };
 
   const speakMock = jest.fn();
   const repromptMock = jest.fn();

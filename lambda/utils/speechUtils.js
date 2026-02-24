@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * speechUtils.js
  * Helpers for building SSML speech strings for Alexa responses.
@@ -57,7 +55,7 @@ function degreesToCardinal(degrees) {
     'northwest',
     'north-northwest',
   ];
-  const index = Math.round(((degrees % 360) + 360) % 360 / 22.5) % 16;
+  const index = Math.round((((degrees % 360) + 360) % 360) / 22.5) % 16;
   return directions[index];
 }
 

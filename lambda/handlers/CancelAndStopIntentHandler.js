@@ -1,14 +1,12 @@
-'use strict';
-
 const Alexa = require('ask-sdk-core');
 const { MESSAGES } = require('../constants');
 
 const CancelAndStopIntentHandler = {
   canHandle(handlerInput) {
     return (
-      Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
-      (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent' ||
-        Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent')
+      Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+      && (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent'
+        || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent')
     );
   },
 

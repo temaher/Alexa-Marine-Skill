@@ -12,5 +12,6 @@ module.exports = {
     'no-console': 'off',
     'max-len': ['error', { code: 100 }],
     'import/no-extraneous-dependencies': ['error', { devDependencies: ['tests/**/*.js'] }],
+    'no-underscore-dangle': ['error', { allow: ['_placeholder', '_httpClient'] }],
   },
 };

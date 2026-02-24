@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * dateUtils.js
  * Date/time formatting helpers for NOAA API calls and Alexa speech output.

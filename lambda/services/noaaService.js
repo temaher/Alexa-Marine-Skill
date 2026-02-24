@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * noaaService.js
  *
@@ -13,8 +11,7 @@
  */
 
 const axios = require('axios');
-const { NOAA_API_BASE, NWS_API_BASE, NDBC_BASE, DEFAULT_STATION_ID, HTTP_TIMEOUT } =
-  require('../constants');
+const { DEFAULT_STATION_ID, HTTP_TIMEOUT } = require('../constants');
 
 const httpClient = axios.create({
   timeout: HTTP_TIMEOUT,
@@ -150,7 +147,7 @@ async function getMarineForecast(zone) {
  * @param {string} zone - NWS zone code (e.g. 'ANZ335')
  * @returns {Promise<Array<{ event: string, headline: string, description: string }>>}
  */
-async function getMarineAlerts(zone) {
+async function getMarineAlerts() {
   // TODO: Replace this placeholder with a real NWS alerts call.
   //
   // Endpoint:

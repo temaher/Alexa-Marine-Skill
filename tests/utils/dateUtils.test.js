@@ -1,5 +1,3 @@
-'use strict';
-
 const {
   toNoaaFormat,
   todayNoaaFormat,
@@ -33,7 +31,6 @@ describe('dateUtils', () => {
 
   describe('tomorrowNoaaFormat', () => {
     test('returns a date one day after today', () => {
-      const today = new Date();
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
       expect(tomorrowNoaaFormat()).toBe(toNoaaFormat(tomorrow));
@@ -101,7 +98,9 @@ describe('dateUtils', () => {
     });
 
     test('returns a weekday name for a further-out date', () => {
-      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const dayNames = [
+        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
+      ];
       const d = new Date();
       d.setDate(d.getDate() + 5);
       const yyyy = d.getFullYear();

@@ -1,5 +1,3 @@
-'use strict';
-
 const Alexa = require('ask-sdk-core');
 
 const LaunchRequestHandler = require('./handlers/LaunchRequestHandler');

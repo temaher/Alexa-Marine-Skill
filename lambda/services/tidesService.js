@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * tidesService.js
  *
@@ -10,7 +8,7 @@
  */
 
 const axios = require('axios');
-const { NOAA_API_BASE, DEFAULT_STATION_ID, HTTP_TIMEOUT } = require('../constants');
+const { DEFAULT_STATION_ID, HTTP_TIMEOUT } = require('../constants');
 
 const httpClient = axios.create({
   timeout: HTTP_TIMEOUT,
@@ -32,7 +30,7 @@ const httpClient = axios.create({
  * @returns {Promise<Array<{ type: 'H'|'L', time: string, height: number }>>}
  *   Each element represents one high or low tide event.
  */
-async function getTidePredictions(stationId = DEFAULT_STATION_ID, beginDate, endDate) {
+async function getTidePredictions() {
   // TODO: Replace this placeholder with a real NOAA CO-OPS predictions call.
   //
   // Endpoint:

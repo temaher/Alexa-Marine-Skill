@@ -1,8 +1,6 @@
-'use strict';
-
 const nock = require('nock');
 const noaaService = require('../../lambda/services/noaaService');
-const { NOAA_API_BASE, NWS_API_BASE, NDBC_BASE } = require('../../lambda/constants');
+const { NOAA_API_BASE, DEFAULT_STATION_ID } = require('../../lambda/constants');
 
 afterEach(() => {
   nock.cleanAll();
@@ -26,7 +24,7 @@ describe('noaaService — placeholder behaviour', () => {
 
     test('uses DEFAULT_STATION_ID when none is supplied', async () => {
       const result = await noaaService.getStationWeather();
-      expect(result.stationId).toBe(require('../../lambda/constants').DEFAULT_STATION_ID);
+      expect(result.stationId).toBe(DEFAULT_STATION_ID);
     });
 
     test('returns _placeholder: true before real integration', async () => {
@@ -88,7 +86,9 @@ describe.skip('noaaService — real API integration (TODO)', () => {
         .get('')
         .query(true)
         .reply(200, {
-          data: [{ t: '2024-06-01 14:00', s: '12.3', d: 'NNE', g: '16.0' }],
+          data: [{
+            t: '2024-06-01 14:00', s: '12.3', d: 'NNE', g: '16.0',
+          }],
         });
 
       const result = await noaaService.getStationWeather('8443970');

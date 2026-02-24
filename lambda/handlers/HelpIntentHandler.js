@@ -1,13 +1,11 @@
-'use strict';
-
 const Alexa = require('ask-sdk-core');
 const { MESSAGES } = require('../constants');
 
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return (
-      Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
-      Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent'
+      Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+      && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent'
     );
   },
 

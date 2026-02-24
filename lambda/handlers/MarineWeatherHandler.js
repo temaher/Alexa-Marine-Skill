@@ -1,5 +1,3 @@
-'use strict';
-
 const Alexa = require('ask-sdk-core');
 const noaaService = require('../services/noaaService');
 const locationService = require('../services/locationService');
@@ -9,8 +7,8 @@ const { MESSAGES } = require('../constants');
 const MarineWeatherHandler = {
   canHandle(handlerInput) {
     return (
-      Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
-      Alexa.getIntentName(handlerInput.requestEnvelope) === 'MarineWeatherIntent'
+      Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+      && Alexa.getIntentName(handlerInput.requestEnvelope) === 'MarineWeatherIntent'
     );
   },
 
@@ -33,17 +31,19 @@ const MarineWeatherHandler = {
       } else {
         const windDir = weather.windDirection != null ? weather.windDirection : 'unknown';
         const windSpd = weather.windSpeed != null ? `${weather.windSpeed} knots` : 'unknown';
-        const gusts =
-          weather.windGust != null ? `gusting to ${weather.windGust} knots` : '';
+        const gusts = weather.windGust != null ? `gusting to ${weather.windGust} knots` : '';
+        const airTempStr = weather.airTemperature != null
+          ? `${weather.airTemperature} degrees` : 'unavailable';
+        const waterTempStr = weather.waterTemperature != null
+          ? `${weather.waterTemperature} degrees` : 'unavailable';
 
-        speechText =
-          `Current conditions at station ${stationId}: ` +
-          `${pause()}` +
-          `Wind ${windDir} at ${windSpd}${gusts ? `, ${gusts}` : ''}.` +
-          `${pause()}` +
-          `Air temperature ${weather.airTemperature != null ? `${weather.airTemperature} degrees` : 'unavailable'}.` +
-          `${pause()}` +
-          `Water temperature ${weather.waterTemperature != null ? `${weather.waterTemperature} degrees` : 'unavailable'}.`;
+        speechText = `Current conditions at station ${stationId}: `
+          + `${pause()}`
+          + `Wind ${windDir} at ${windSpd}${gusts ? `, ${gusts}` : ''}.`
+          + `${pause()}`
+          + `Air temperature ${airTempStr}.`
+          + `${pause()}`
+          + `Water temperature ${waterTempStr}.`;
       }
 
       // If a forecast zone was provided, also fetch the marine zone forecast
@@ -51,7 +51,8 @@ const MarineWeatherHandler = {
         const forecast = await noaaService.getMarineForecast(zoneSlot);
         if (forecast.periods && forecast.periods.length > 0) {
           const period = forecast.periods[0];
-          speechText += `${pause('700ms')}Marine forecast: ${period.detailedForecast || period.shortForecast}.`;
+          const forecastText = period.detailedForecast || period.shortForecast;
+          speechText += `${pause('700ms')}Marine forecast: ${forecastText}.`;
         }
       }
 

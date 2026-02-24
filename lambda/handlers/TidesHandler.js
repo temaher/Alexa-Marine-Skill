@@ -1,5 +1,3 @@
-'use strict';
-
 const Alexa = require('ask-sdk-core');
 const tidesService = require('../services/tidesService');
 const locationService = require('../services/locationService');
@@ -10,8 +8,8 @@ const { MESSAGES } = require('../constants');
 const TidesHandler = {
   canHandle(handlerInput) {
     return (
-      Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
-      Alexa.getIntentName(handlerInput.requestEnvelope) === 'TidesIntent'
+      Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+      && Alexa.getIntentName(handlerInput.requestEnvelope) === 'TidesIntent'
     );
   },
 
@@ -41,7 +39,8 @@ const TidesHandler = {
 
       if (filtered.length === 0) {
         const type = tideTypeSlot || 'tide';
-        const speechText = `I could not find any ${type} tide predictions for today at station ${stationId}.`;
+        const speechText = `I could not find any ${type} tide predictions`
+          + ` for today at station ${stationId}.`;
         return handlerInput.responseBuilder
           .speak(speak(speechText))
           .reprompt(MESSAGES.LAUNCH_REPROMPT)
@@ -55,10 +54,9 @@ const TidesHandler = {
         return `${label} at ${time}${height}`;
       });
 
-      const speechText =
-        `Today's tide predictions for station ${stationId}: ` +
-        `${pause()}` +
-        parts.join(`${pause()}`);
+      const speechText = `Today's tide predictions for station ${stationId}: `
+        + `${pause()}${
+          parts.join(`${pause()}`)}`;
 
       return handlerInput.responseBuilder
         .speak(speak(speechText))

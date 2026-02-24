@@ -1,5 +1,3 @@
-'use strict';
-
 const TidesHandler = require('../../lambda/handlers/TidesHandler');
 const tidesService = require('../../lambda/services/tidesService');
 const locationService = require('../../lambda/services/locationService');
@@ -96,7 +94,8 @@ describe('TidesHandler', () => {
 
       await TidesHandler.handle(hi);
 
-      expect(tidesService.getTidePredictions).toHaveBeenCalledWith('8518750', '20240601', '20240601');
+      expect(tidesService.getTidePredictions)
+        .toHaveBeenCalledWith('8518750', '20240601', '20240601');
       expect(locationService.getNearestStationId).not.toHaveBeenCalled();
     });
 

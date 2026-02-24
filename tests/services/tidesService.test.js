@@ -1,5 +1,3 @@
-'use strict';
-
 const tidesService = require('../../lambda/services/tidesService');
 const { DEFAULT_STATION_ID } = require('../../lambda/constants');
 

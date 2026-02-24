@@ -1,5 +1,3 @@
-'use strict';
-
 const LaunchRequestHandler = require('../../lambda/handlers/LaunchRequestHandler');
 const { mockHandlerInput } = require('../helpers/mockHandlerInput');
 const { MESSAGES } = require('../../lambda/constants');
