@@ -11,8 +11,8 @@ module.exports = {
   NDBC_BASE:
     process.env.NDBC_BASE || 'https://www.ndbc.noaa.gov/data/realtime2',
 
-  // Fallback NOAA station: Boston, MA (8443970)
-  DEFAULT_STATION_ID: process.env.DEFAULT_STATION_ID || '8443970',
+  // Fallback NOAA station: Seattle, WA — Puget Sound / Elliott Bay (9447130)
+  DEFAULT_STATION_ID: process.env.DEFAULT_STATION_ID || '9447130',
 
   HTTP_TIMEOUT: 5000,
 

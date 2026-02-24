@@ -89,21 +89,21 @@
         {
           "name": "NWS_ZONE",
           "values": [
-            { "name": { "value": "ANZ335", "synonyms": ["New York Bight"] } },
-            { "name": { "value": "ANZ338", "synonyms": ["Long Island Sound"] } },
-            { "name": { "value": "ANZ430", "synonyms": ["Delaware Bay"] } },
-            { "name": { "value": "ANZ531", "synonyms": ["Chesapeake Bay"] } },
-            { "name": { "value": "AMZ630", "synonyms": ["Gulf of Maine"] } }
+            { "name": { "value": "PZZ131", "synonyms": ["Puget Sound north", "northern Puget Sound"] } },
+            { "name": { "value": "PZZ132", "synonyms": ["Puget Sound south", "southern Puget Sound"] } },
+            { "name": { "value": "PZZ134", "synonyms": ["Admiralty Inlet"] } },
+            { "name": { "value": "PZZ111", "synonyms": ["Strait of Juan de Fuca east", "eastern strait"] } },
+            { "name": { "value": "PZZ136", "synonyms": ["Hood Canal"] } }
           ]
         },
         {
           "name": "NOAA_STATION_ID",
           "values": [
-            { "name": { "value": "8443970", "synonyms": ["Boston"] } },
-            { "name": { "value": "8518750", "synonyms": ["The Battery", "New York"] } },
-            { "name": { "value": "8461490", "synonyms": ["New London", "Connecticut"] } },
-            { "name": { "value": "8534720", "synonyms": ["Atlantic City"] } },
-            { "name": { "value": "8638610", "synonyms": ["Sewells Point", "Norfolk"] } }
+            { "name": { "value": "9447130", "synonyms": ["Seattle", "Elliott Bay"] } },
+            { "name": { "value": "9444900", "synonyms": ["Port Townsend"] } },
+            { "name": { "value": "9446484", "synonyms": ["Tacoma"] } },
+            { "name": { "value": "9447214", "synonyms": ["Shilshole", "Shilshole Bay"] } },
+            { "name": { "value": "9446828", "synonyms": ["Olympia"] } }
           ]
         }
       ]
