@@ -110,6 +110,20 @@ describe('TidesHandler', () => {
     });
   });
 
+  describe('handle — empty filtered results', () => {
+    test('returns "could not find" message when tideType filter matches nothing', async () => {
+      // All predictions are H/L; filtering by an unrecognised letter yields empty
+      tidesService.getTidePredictions.mockResolvedValue(SAMPLE_PREDICTIONS);
+      const hi = mockHandlerInput('IntentRequest', 'TidesIntent', { tideType: 'x' });
+
+      await TidesHandler.handle(hi);
+
+      const spokenText = hi.responseBuilder.speak.mock.calls[0][0];
+      expect(spokenText).toContain('could not find');
+      expect(spokenText).toContain('x');
+    });
+  });
+
   describe('handle — error handling', () => {
     test('returns error message when tidesService throws', async () => {
       tidesService.getTidePredictions.mockRejectedValue(new Error('Timeout'));

@@ -111,6 +111,85 @@ describe('MarineWeatherHandler', () => {
     });
   });
 
+  describe('handle — zone forecast', () => {
+    test('appends zone forecast when zoneSlot is provided and weather is real', async () => {
+      noaaService.getStationWeather.mockResolvedValue(REAL_WEATHER);
+      noaaService.getMarineForecast = jest.fn().mockResolvedValue({
+        periods: [{ detailedForecast: 'Seas 3 to 5 feet. Winds NW 15 knots.' }],
+      });
+      const hi = mockHandlerInput('IntentRequest', 'MarineWeatherIntent', {
+        forecastZone: 'ANZ335',
+      });
+
+      await MarineWeatherHandler.handle(hi);
+
+      const spokenText = hi.responseBuilder.speak.mock.calls[0][0];
+      expect(spokenText).toContain('Marine forecast');
+      expect(spokenText).toContain('Seas 3 to 5 feet');
+    });
+
+    test('falls back to shortForecast when detailedForecast is absent', async () => {
+      noaaService.getStationWeather.mockResolvedValue(REAL_WEATHER);
+      noaaService.getMarineForecast = jest.fn().mockResolvedValue({
+        periods: [{ shortForecast: 'Slight chop' }],
+      });
+      const hi = mockHandlerInput('IntentRequest', 'MarineWeatherIntent', {
+        forecastZone: 'ANZ335',
+      });
+
+      await MarineWeatherHandler.handle(hi);
+
+      const spokenText = hi.responseBuilder.speak.mock.calls[0][0];
+      expect(spokenText).toContain('Slight chop');
+    });
+
+    test('does not append forecast when periods array is empty', async () => {
+      noaaService.getStationWeather.mockResolvedValue(REAL_WEATHER);
+      noaaService.getMarineForecast = jest.fn().mockResolvedValue({ periods: [] });
+      const hi = mockHandlerInput('IntentRequest', 'MarineWeatherIntent', {
+        forecastZone: 'ANZ335',
+      });
+
+      await MarineWeatherHandler.handle(hi);
+
+      const spokenText = hi.responseBuilder.speak.mock.calls[0][0];
+      expect(spokenText).not.toContain('Marine forecast');
+    });
+
+    test('does not fetch zone forecast when weather is a placeholder', async () => {
+      noaaService.getStationWeather.mockResolvedValue(PLACEHOLDER_WEATHER);
+      noaaService.getMarineForecast = jest.fn();
+      const hi = mockHandlerInput('IntentRequest', 'MarineWeatherIntent', {
+        forecastZone: 'ANZ335',
+      });
+
+      await MarineWeatherHandler.handle(hi);
+
+      expect(noaaService.getMarineForecast).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('handle — null weather fields', () => {
+    test('says "unknown" for null wind fields and "unavailable" for null temperatures', async () => {
+      noaaService.getStationWeather.mockResolvedValue({
+        _placeholder: false,
+        stationId: '8443970',
+        windDirection: null,
+        windSpeed: null,
+        windGust: null,
+        airTemperature: null,
+        waterTemperature: null,
+      });
+      const hi = mockHandlerInput('IntentRequest', 'MarineWeatherIntent');
+
+      await MarineWeatherHandler.handle(hi);
+
+      const spokenText = hi.responseBuilder.speak.mock.calls[0][0];
+      expect(spokenText).toContain('unknown');
+      expect(spokenText).toContain('unavailable');
+    });
+  });
+
   describe('handle — error handling', () => {
     test('returns error message when noaaService throws', async () => {
       noaaService.getStationWeather.mockRejectedValue(new Error('Network error'));
