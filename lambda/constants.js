@@ -20,10 +20,13 @@ module.exports = {
       'Welcome to Marine Skill. You can ask me for marine weather, '
       + 'tide predictions, or buoy conditions. What would you like to know?',
     LAUNCH_REPROMPT:
-      'Try asking for marine weather or tide times. What would you like?',
+      'Try asking for marine weather, tide times, buoy conditions, or marine alerts. '
+      + 'What would you like?',
     HELP:
       'You can ask for marine weather by saying "what is the marine weather", '
-      + 'or get tide information by saying "when is high tide". '
+      + 'get tide information by saying "when is high tide", '
+      + 'check buoy conditions by saying "buoy data for Cape Elizabeth", '
+      + 'or ask "are there any marine alerts". '
       + 'What would you like to know?',
     CANCEL: 'Goodbye, and stay safe on the water!',
     ERROR:
@@ -37,8 +40,12 @@ module.exports = {
     BUOY_PLACEHOLDER:
       'Buoy observation data integration is coming soon. '
       + 'I will be able to report wave period, water temperature, and swell direction.',
+    NO_ALERTS: 'There are no active marine alerts for that zone.',
+    LOCATION_PERMISSION_REQUIRED:
+      'To find your nearest station, I need access to your device location. '
+      + 'Please open the Alexa app to grant location permission.',
     FALLBACK:
       "Sorry, I'm not sure how to help with that. "
-      + 'Try asking for marine weather or tide times.',
+      + 'Try asking for marine weather, tide times, buoy conditions, or marine alerts.',
   },
 };

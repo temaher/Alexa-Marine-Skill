@@ -5,7 +5,13 @@ const { mockHandlerInput } = require('../helpers/mockHandlerInput');
 const { MESSAGES } = require('../../lambda/constants');
 
 jest.mock('../../lambda/services/tidesService');
-jest.mock('../../lambda/services/locationService');
+jest.mock('../../lambda/services/locationService', () => ({
+  ...jest.requireActual('../../lambda/services/locationService'),
+  getNearestStationId: jest.fn(),
+}));
+
+const { LocationPermissionError } = require('../../lambda/services/locationService');
+
 jest.mock('../../lambda/utils/dateUtils', () => ({
   todayNoaaFormat: jest.fn().mockReturnValue('20240601'),
   formatTideTime: jest.requireActual('../../lambda/utils/dateUtils').formatTideTime,
@@ -21,6 +27,7 @@ const SAMPLE_PREDICTIONS = [
 beforeEach(() => {
   jest.clearAllMocks();
   locationService.getNearestStationId.mockResolvedValue('8443970');
+  tidesService.getCurrentWaterLevel.mockResolvedValue(null);
 });
 
 describe('TidesHandler', () => {
@@ -132,6 +139,47 @@ describe('TidesHandler', () => {
       await TidesHandler.handle(hi);
 
       expect(hi.responseBuilder.speak).toHaveBeenCalledWith(MESSAGES.ERROR);
+    });
+
+    test('returns permission consent card when location permission is denied', async () => {
+      locationService.getNearestStationId.mockRejectedValue(new LocationPermissionError());
+      const hi = mockHandlerInput('IntentRequest', 'TidesIntent');
+
+      await TidesHandler.handle(hi);
+
+      expect(hi.responseBuilder.speak).toHaveBeenCalledWith(MESSAGES.LOCATION_PERMISSION_REQUIRED);
+      expect(hi.responseBuilder.withAskForPermissionsConsentCard).toHaveBeenCalledWith(
+        ['alexa::devices:all:address:country_and_postal_code:read'],
+      );
+    });
+  });
+
+  describe('handle — current water level', () => {
+    test('prepends current water level to speech when available', async () => {
+      tidesService.getTidePredictions.mockResolvedValue(SAMPLE_PREDICTIONS);
+      tidesService.getCurrentWaterLevel.mockResolvedValue({
+        _placeholder: false, stationId: '8443970', waterLevel: 3.2, timestamp: '2024-06-01 14:00',
+      });
+      const hi = mockHandlerInput('IntentRequest', 'TidesIntent');
+
+      await TidesHandler.handle(hi);
+
+      const spokenText = hi.responseBuilder.speak.mock.calls[0][0];
+      expect(spokenText).toContain('Current water level');
+      expect(spokenText).toContain('3.2');
+    });
+
+    test('still speaks tide predictions when getCurrentWaterLevel throws', async () => {
+      tidesService.getTidePredictions.mockResolvedValue(SAMPLE_PREDICTIONS);
+      tidesService.getCurrentWaterLevel.mockRejectedValue(new Error('Water level unavailable'));
+      const hi = mockHandlerInput('IntentRequest', 'TidesIntent');
+
+      await TidesHandler.handle(hi);
+
+      const spokenText = hi.responseBuilder.speak.mock.calls[0][0];
+      expect(spokenText).toContain('High tide');
+      expect(spokenText).toContain('Low tide');
+      expect(spokenText).not.toContain('Current water level');
     });
   });
 });

@@ -58,6 +58,41 @@
           ]
         },
         {
+          "name": "BuoyDataIntent",
+          "slots": [
+            {
+              "name": "buoyId",
+              "type": "NDBC_BUOY_ID"
+            }
+          ],
+          "samples": [
+            "what are the buoy conditions",
+            "buoy data for {buoyId}",
+            "get buoy reading for {buoyId}",
+            "wave height at {buoyId}",
+            "what are the wave conditions at {buoyId}",
+            "buoy conditions at {buoyId}"
+          ]
+        },
+        {
+          "name": "MarineAlertsIntent",
+          "slots": [
+            {
+              "name": "forecastZone",
+              "type": "NWS_ZONE"
+            }
+          ],
+          "samples": [
+            "are there any marine alerts",
+            "any active warnings",
+            "any small craft advisories",
+            "are there gale warnings",
+            "marine alerts for {forecastZone}",
+            "what are the marine warnings for {forecastZone}",
+            "any active alerts for {forecastZone}"
+          ]
+        },
+        {
           "name": "AMAZON.HelpIntent",
           "samples": []
         },
@@ -94,6 +129,15 @@
             { "name": { "value": "PZZ134", "synonyms": ["Admiralty Inlet"] } },
             { "name": { "value": "PZZ111", "synonyms": ["Strait of Juan de Fuca east", "eastern strait"] } },
             { "name": { "value": "PZZ136", "synonyms": ["Hood Canal"] } }
+          ]
+        },
+        {
+          "name": "NDBC_BUOY_ID",
+          "values": [
+            { "name": { "value": "46041", "synonyms": ["Cape Elizabeth", "Cape Elizabeth buoy"] } },
+            { "name": { "value": "46087", "synonyms": ["Neah Bay", "Neah Bay buoy"] } },
+            { "name": { "value": "46088", "synonyms": ["New Dungeness", "New Dungeness buoy"] } },
+            { "name": { "value": "46029", "synonyms": ["Columbia River Bar", "Columbia River"] } }
           ]
         },
         {

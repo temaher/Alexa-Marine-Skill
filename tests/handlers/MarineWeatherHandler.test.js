@@ -5,7 +5,12 @@ const { mockHandlerInput } = require('../helpers/mockHandlerInput');
 const { MESSAGES } = require('../../lambda/constants');
 
 jest.mock('../../lambda/services/noaaService');
-jest.mock('../../lambda/services/locationService');
+jest.mock('../../lambda/services/locationService', () => ({
+  ...jest.requireActual('../../lambda/services/locationService'),
+  getNearestStationId: jest.fn(),
+}));
+
+const { LocationPermissionError } = require('../../lambda/services/locationService');
 
 const PLACEHOLDER_WEATHER = {
   _placeholder: true,
@@ -199,6 +204,18 @@ describe('MarineWeatherHandler', () => {
       await MarineWeatherHandler.handle(hi);
 
       expect(hi.responseBuilder.speak).toHaveBeenCalledWith(MESSAGES.ERROR);
+    });
+
+    test('returns permission consent card when location permission is denied', async () => {
+      locationService.getNearestStationId.mockRejectedValue(new LocationPermissionError());
+      const hi = mockHandlerInput('IntentRequest', 'MarineWeatherIntent');
+
+      await MarineWeatherHandler.handle(hi);
+
+      expect(hi.responseBuilder.speak).toHaveBeenCalledWith(MESSAGES.LOCATION_PERMISSION_REQUIRED);
+      expect(hi.responseBuilder.withAskForPermissionsConsentCard).toHaveBeenCalledWith(
+        ['alexa::devices:all:address:country_and_postal_code:read'],
+      );
     });
   });
 });

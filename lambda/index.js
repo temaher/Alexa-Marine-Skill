@@ -3,6 +3,8 @@ const Alexa = require('ask-sdk-core');
 const LaunchRequestHandler = require('./handlers/LaunchRequestHandler');
 const MarineWeatherHandler = require('./handlers/MarineWeatherHandler');
 const TidesHandler = require('./handlers/TidesHandler');
+const BuoyDataHandler = require('./handlers/BuoyDataHandler');
+const MarineAlertsHandler = require('./handlers/MarineAlertsHandler');
 const HelpIntentHandler = require('./handlers/HelpIntentHandler');
 const CancelAndStopIntentHandler = require('./handlers/CancelAndStopIntentHandler');
 const SessionEndedRequestHandler = require('./handlers/SessionEndedRequestHandler');
@@ -14,6 +16,8 @@ exports.handler = Alexa.SkillBuilders.custom()
     LaunchRequestHandler,
     MarineWeatherHandler,
     TidesHandler,
+    BuoyDataHandler,
+    MarineAlertsHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,

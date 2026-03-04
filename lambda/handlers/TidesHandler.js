@@ -1,6 +1,6 @@
 const Alexa = require('ask-sdk-core');
 const tidesService = require('../services/tidesService');
-const locationService = require('../services/locationService');
+const { getNearestStationId, LocationPermissionError } = require('../services/locationService');
 const { speak, pause } = require('../utils/speechUtils');
 const { formatTideTime, todayNoaaFormat } = require('../utils/dateUtils');
 const { MESSAGES } = require('../constants');
@@ -19,13 +19,16 @@ const TidesHandler = {
     const stationSlot = slots.stationId && slots.stationId.value;
 
     try {
-      const stationId = stationSlot || (await locationService.getNearestStationId(handlerInput));
+      const stationId = stationSlot || (await getNearestStationId(handlerInput));
       const today = todayNoaaFormat();
 
-      const predictions = await tidesService.getTidePredictions(stationId, today, today);
+      // Fetch tide predictions and current water level in parallel
+      const [predictions, waterLevelData] = await Promise.all([
+        tidesService.getTidePredictions(stationId, today, today),
+        tidesService.getCurrentWaterLevel(stationId).catch(() => null),
+      ]);
 
       if (!predictions || predictions.length === 0) {
-        // Service not yet integrated — return placeholder response
         return handlerInput.responseBuilder
           .speak(speak(MESSAGES.TIDES_PLACEHOLDER))
           .reprompt(MESSAGES.LAUNCH_REPROMPT)
@@ -54,15 +57,31 @@ const TidesHandler = {
         return `${label} at ${time}${height}`;
       });
 
-      const speechText = `Today's tide predictions for station ${stationId}: `
-        + `${pause()}${
-          parts.join(`${pause()}`)}`;
+      // Prepend current water level if available
+      const waterLevelPrefix = (waterLevelData && !waterLevelData._placeholder)
+        ? `Current water level ${waterLevelData.waterLevel} feet. ${pause()}`
+        : '';
+
+      const speechText = [
+        waterLevelPrefix,
+        `Today's tide predictions for station ${stationId}: `,
+        pause(),
+        parts.join(pause()),
+      ].join('');
 
       return handlerInput.responseBuilder
         .speak(speak(speechText))
         .reprompt(MESSAGES.LAUNCH_REPROMPT)
         .getResponse();
     } catch (err) {
+      if (err instanceof LocationPermissionError) {
+        return handlerInput.responseBuilder
+          .speak(MESSAGES.LOCATION_PERMISSION_REQUIRED)
+          .withAskForPermissionsConsentCard(
+            ['alexa::devices:all:address:country_and_postal_code:read'],
+          )
+          .getResponse();
+      }
       console.error('TidesHandler error:', err);
       return handlerInput.responseBuilder
         .speak(MESSAGES.ERROR)

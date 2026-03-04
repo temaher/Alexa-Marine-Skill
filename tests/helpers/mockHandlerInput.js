@@ -24,12 +24,18 @@ function mockHandlerInput(requestType, intentName = '', slots = {}) {
   const speakMock = jest.fn();
   const repromptMock = jest.fn();
   const getResponseMock = jest.fn().mockReturnValue({ type: 'mock-response' });
+  const withAskForPermissionsConsentCardMock = jest.fn();
 
-  // Each builder method returns `this` so calls can be chained
-  speakMock.mockReturnValue({
-    reprompt: repromptMock.mockReturnValue({ getResponse: getResponseMock }),
+  // Builder pattern: each method returns the builder so calls can be chained
+  const builder = {
+    speak: speakMock,
+    reprompt: repromptMock,
     getResponse: getResponseMock,
-  });
+    withAskForPermissionsConsentCard: withAskForPermissionsConsentCardMock,
+  };
+  speakMock.mockReturnValue(builder);
+  repromptMock.mockReturnValue(builder);
+  withAskForPermissionsConsentCardMock.mockReturnValue(builder);
 
   return {
     requestEnvelope: {
@@ -43,11 +49,7 @@ function mockHandlerInput(requestType, intentName = '', slots = {}) {
       },
       session: { new: true, sessionId: 'test-session-id' },
     },
-    responseBuilder: {
-      speak: speakMock,
-      reprompt: repromptMock,
-      getResponse: getResponseMock,
-    },
+    responseBuilder: builder,
     attributesManager: {
       getSessionAttributes: jest.fn().mockReturnValue({}),
       setSessionAttributes: jest.fn(),

@@ -1,6 +1,6 @@
 const Alexa = require('ask-sdk-core');
 const noaaService = require('../services/noaaService');
-const locationService = require('../services/locationService');
+const { getNearestStationId, LocationPermissionError } = require('../services/locationService');
 const { speak, pause } = require('../utils/speechUtils');
 const { MESSAGES } = require('../constants');
 
@@ -18,7 +18,7 @@ const MarineWeatherHandler = {
     const stationSlot = slots.stationId && slots.stationId.value;
 
     try {
-      const stationId = stationSlot || (await locationService.getNearestStationId(handlerInput));
+      const stationId = stationSlot || (await getNearestStationId(handlerInput));
 
       // Fetch current station weather conditions
       const weather = await noaaService.getStationWeather(stationId);
@@ -61,6 +61,14 @@ const MarineWeatherHandler = {
         .reprompt(MESSAGES.LAUNCH_REPROMPT)
         .getResponse();
     } catch (err) {
+      if (err instanceof LocationPermissionError) {
+        return handlerInput.responseBuilder
+          .speak(MESSAGES.LOCATION_PERMISSION_REQUIRED)
+          .withAskForPermissionsConsentCard(
+            ['alexa::devices:all:address:country_and_postal_code:read'],
+          )
+          .getResponse();
+      }
       console.error('MarineWeatherHandler error:', err);
       return handlerInput.responseBuilder
         .speak(MESSAGES.ERROR)
