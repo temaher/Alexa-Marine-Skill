@@ -170,6 +170,7 @@ describe('MarineWeatherHandler', () => {
   });
 
   describe('handle — null weather fields', () => {
+    // eslint-disable-next-line max-len
     test('says "unknown" for null wind fields and "unavailable" for null temperatures', async () => {
       noaaService.getStationWeather.mockResolvedValue({
         _placeholder: false,
