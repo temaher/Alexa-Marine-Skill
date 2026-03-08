@@ -25,16 +25,13 @@
         }
       },
       "isAvailableWorldwide": false,
-      "targetedRegions": ["NA_US"],
+      "distributionCountries": ["US"],
       "category": "WEATHER",
       "distributionMode": "PUBLIC",
       "testingInstructions": "Enable the skill and say 'Alexa, open marine skill'. Ask for marine weather or tide times."
     },
     "apis": {
       "custom": {
-        "endpoint": {
-          "sourceDir": "lambda"
-        },
         "interfaces": []
       }
     },
