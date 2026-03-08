@@ -1,0 +1,644 @@
+/*
+ * SmugMug Dark Theme — Photography Portfolio
+ * A popular dark theme optimized for showcasing photography.
+ * Inspired by the dark UI conventions of 500px, Lightroom, and professional
+ * photography portfolio sites.
+ *
+ * Usage: Paste into SmugMug → Customize → Advanced → Custom CSS
+ */
+
+/* =========================================================================
+   1. GLOBAL / RESET
+   ========================================================================= */
+
+body,
+html {
+  background-color: #111111 !important;
+  color: #e0e0e0 !important;
+}
+
+/* Remove SmugMug's default white/light backgrounds site-wide */
+*,
+*::before,
+*::after {
+  scrollbar-color: #444444 #1a1a1a;
+  scrollbar-width: thin;
+}
+
+/* =========================================================================
+   2. TYPOGRAPHY
+   ========================================================================= */
+
+body,
+p,
+li,
+td,
+th,
+label,
+input,
+textarea,
+select {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  color: #e0e0e0 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.04em;
+}
+
+a,
+a:visited {
+  color: #aaaaaa !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* =========================================================================
+   3. SITE HEADER / NAVIGATION
+   ========================================================================= */
+
+/* Top navigation bar */
+#site-header,
+.site-header,
+header,
+.sm-nav,
+nav,
+.nav-bar,
+.navbar,
+[class*="header"] {
+  background-color: #0d0d0d !important;
+  border-bottom: 1px solid #2a2a2a !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Site title / logo text */
+.site-title,
+.site-name,
+#site-title,
+.sm-logo,
+.logo {
+  color: #ffffff !important;
+  font-weight: 200 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+
+/* Navigation links */
+.sm-nav a,
+nav a,
+.nav a,
+.nav-link,
+.menu-item a {
+  color: #bbbbbb !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 0 12px !important;
+  transition: color 0.2s ease !important;
+}
+
+.sm-nav a:hover,
+nav a:hover,
+.nav a:hover,
+.nav-link:hover,
+.menu-item a:hover {
+  color: #ffffff !important;
+}
+
+/* Active / current page nav item */
+.nav-item.active a,
+.menu-item.current a,
+.sm-nav .active a {
+  color: #ffffff !important;
+  border-bottom: 2px solid #ffffff !important;
+}
+
+/* =========================================================================
+   4. HERO / BANNER
+   ========================================================================= */
+
+.site-banner,
+.hero,
+.hero-image,
+.banner,
+[class*="hero"],
+[class*="banner"] {
+  background-color: #0d0d0d !important;
+  border-bottom: 1px solid #222222 !important;
+}
+
+/* =========================================================================
+   5. GALLERY / PHOTO GRID
+   ========================================================================= */
+
+/* Gallery container */
+.gallery,
+.sm-gallery,
+.photo-grid,
+[class*="gallery"],
+[class*="Grid"] {
+  background-color: #111111 !important;
+}
+
+/* Individual thumbnail tiles */
+.sm-tile,
+.tile,
+.gallery-item,
+.photo-thumb,
+[class*="tile"],
+[class*="Tile"] {
+  background-color: #1a1a1a !important;
+  border: 1px solid #222222 !important;
+  border-radius: 2px !important;
+  overflow: hidden !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.sm-tile:hover,
+.tile:hover,
+.gallery-item:hover,
+.photo-thumb:hover,
+[class*="tile"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7) !important;
+  border-color: #444444 !important;
+}
+
+/* Thumbnail captions */
+.tile-caption,
+.sm-tile-caption,
+.photo-caption,
+.gallery-caption,
+[class*="caption"] {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  color: #cccccc !important;
+  font-size: 0.8rem !important;
+  padding: 6px 10px !important;
+}
+
+/* Thumbnail overlay on hover */
+.sm-tile-overlay,
+.tile-overlay,
+[class*="overlay"] {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.75) 100%
+  ) !important;
+}
+
+/* =========================================================================
+   6. PHOTO LIGHTBOX / DETAIL VIEW
+   ========================================================================= */
+
+/* Lightbox backdrop */
+.sm-lightbox,
+.lightbox,
+.photo-lightbox,
+[class*="lightbox"],
+[class*="Lightbox"] {
+  background-color: rgba(0, 0, 0, 0.96) !important;
+}
+
+/* Lightbox image area */
+.lightbox-image,
+.sm-lightbox-image,
+[class*="lightbox-image"] {
+  background-color: #000000 !important;
+}
+
+/* Lightbox info / metadata panel */
+.lightbox-info,
+.photo-info,
+.image-info,
+[class*="lightbox-info"],
+[class*="photo-info"] {
+  background-color: #141414 !important;
+  border-left: 1px solid #2a2a2a !important;
+  color: #cccccc !important;
+  padding: 24px !important;
+}
+
+/* EXIF / metadata text */
+.exif,
+.metadata,
+.photo-meta,
+[class*="exif"],
+[class*="meta"] {
+  color: #888888 !important;
+  font-size: 0.78rem !important;
+}
+
+.exif label,
+.metadata label,
+.photo-meta label,
+[class*="exif"] label {
+  color: #555555 !important;
+  text-transform: uppercase !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.06em !important;
+}
+
+/* Lightbox navigation arrows */
+.lightbox-prev,
+.lightbox-next,
+.sm-nav-prev,
+.sm-nav-next,
+[class*="arrow"],
+[class*="Arrow"] {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 50% !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover,
+.sm-nav-prev:hover,
+.sm-nav-next:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* =========================================================================
+   7. SIDEBAR
+   ========================================================================= */
+
+.sidebar,
+.sm-sidebar,
+aside,
+[class*="sidebar"] {
+  background-color: #141414 !important;
+  border-right: 1px solid #222222 !important;
+}
+
+.sidebar a,
+aside a {
+  color: #aaaaaa !important;
+}
+
+.sidebar a:hover,
+aside a:hover {
+  color: #ffffff !important;
+}
+
+/* =========================================================================
+   8. ALBUMS / FOLDER CARDS
+   ========================================================================= */
+
+.album,
+.album-card,
+.folder-card,
+.sm-album,
+[class*="album"],
+[class*="Album"],
+[class*="folder"] {
+  background-color: #1a1a1a !important;
+  border: 1px solid #272727 !important;
+  border-radius: 3px !important;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+.album:hover,
+.album-card:hover,
+.folder-card:hover,
+[class*="album"]:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6) !important;
+  border-color: #3a3a3a !important;
+}
+
+.album-title,
+.folder-title,
+[class*="album-title"],
+[class*="folder-title"] {
+  color: #dddddd !important;
+  font-weight: 300 !important;
+  font-size: 0.9rem !important;
+  letter-spacing: 0.04em !important;
+}
+
+.album-count,
+.photo-count,
+[class*="count"] {
+  color: #666666 !important;
+  font-size: 0.75rem !important;
+}
+
+/* =========================================================================
+   9. BUTTONS & ACTIONS
+   ========================================================================= */
+
+button,
+.btn,
+.sm-btn,
+input[type='submit'],
+input[type='button'],
+[class*="button"],
+[class*="Button"] {
+  background-color: #2a2a2a !important;
+  color: #dddddd !important;
+  border: 1px solid #3a3a3a !important;
+  border-radius: 2px !important;
+  padding: 8px 18px !important;
+  cursor: pointer !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease !important;
+}
+
+button:hover,
+.btn:hover,
+input[type='submit']:hover,
+input[type='button']:hover {
+  background-color: #383838 !important;
+  border-color: #555555 !important;
+  color: #ffffff !important;
+}
+
+/* Primary / accent button */
+.btn-primary,
+.btn-action,
+.sm-btn-primary,
+[class*="btn-primary"] {
+  background-color: #1a6b3c !important;
+  border-color: #1e8048 !important;
+  color: #ffffff !important;
+}
+
+.btn-primary:hover,
+[class*="btn-primary"]:hover {
+  background-color: #1e8048 !important;
+  border-color: #24964f !important;
+}
+
+/* =========================================================================
+   10. FORMS & INPUTS
+   ========================================================================= */
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='search'],
+textarea,
+select {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #383838 !important;
+  border-radius: 2px !important;
+  padding: 8px 12px !important;
+  transition: border-color 0.2s ease !important;
+}
+
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='password']:focus,
+input[type='search']:focus,
+textarea:focus,
+select:focus {
+  border-color: #666666 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.06) !important;
+}
+
+::placeholder {
+  color: #555555 !important;
+}
+
+/* =========================================================================
+   11. SEARCH
+   ========================================================================= */
+
+.search-bar,
+.sm-search,
+.search-input,
+[class*="search"] {
+  background-color: #1e1e1e !important;
+  border: 1px solid #333333 !important;
+  color: #e0e0e0 !important;
+}
+
+/* =========================================================================
+   12. COMMENTS / SOCIAL
+   ========================================================================= */
+
+.comment,
+.comments,
+.sm-comment,
+[class*="comment"] {
+  background-color: #191919 !important;
+  border-top: 1px solid #242424 !important;
+  color: #bbbbbb !important;
+}
+
+.comment-author,
+[class*="comment-author"] {
+  color: #dddddd !important;
+  font-weight: 600 !important;
+}
+
+.comment-date,
+[class*="comment-date"] {
+  color: #555555 !important;
+  font-size: 0.75rem !important;
+}
+
+/* =========================================================================
+   13. SOCIAL SHARING BAR
+   ========================================================================= */
+
+.share-bar,
+.social-bar,
+.sm-share,
+[class*="share"],
+[class*="social"] {
+  background-color: #161616 !important;
+  border-top: 1px solid #242424 !important;
+}
+
+.share-bar a,
+.social-bar a,
+[class*="share"] a {
+  color: #888888 !important;
+}
+
+.share-bar a:hover,
+.social-bar a:hover,
+[class*="share"] a:hover {
+  color: #ffffff !important;
+}
+
+/* =========================================================================
+   14. FOOTER
+   ========================================================================= */
+
+footer,
+.site-footer,
+#site-footer,
+.sm-footer,
+[class*="footer"] {
+  background-color: #0a0a0a !important;
+  border-top: 1px solid #222222 !important;
+  color: #555555 !important;
+  font-size: 0.75rem !important;
+  padding: 24px 0 !important;
+}
+
+footer a,
+.site-footer a {
+  color: #666666 !important;
+}
+
+footer a:hover,
+.site-footer a:hover {
+  color: #aaaaaa !important;
+}
+
+/* =========================================================================
+   15. LOADING STATES & MISC UI
+   ========================================================================= */
+
+/* Loading spinner track */
+.spinner,
+.loader,
+[class*="spinner"],
+[class*="loader"] {
+  border-color: #333333 !important;
+  border-top-color: #aaaaaa !important;
+}
+
+/* Dividers */
+hr {
+  border: none !important;
+  border-top: 1px solid #2a2a2a !important;
+}
+
+/* Breadcrumbs */
+.breadcrumb,
+.breadcrumbs,
+[class*="breadcrumb"] {
+  color: #666666 !important;
+  font-size: 0.78rem !important;
+}
+
+.breadcrumb a,
+[class*="breadcrumb"] a {
+  color: #777777 !important;
+}
+
+.breadcrumb a:hover {
+  color: #cccccc !important;
+}
+
+/* Tooltips */
+.tooltip,
+[class*="tooltip"] {
+  background-color: #2a2a2a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #3a3a3a !important;
+  border-radius: 2px !important;
+  font-size: 0.78rem !important;
+}
+
+/* Modals / dialogs */
+.modal,
+.dialog,
+[class*="modal"],
+[class*="dialog"] {
+  background-color: #1a1a1a !important;
+  border: 1px solid #333333 !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8) !important;
+}
+
+.modal-header,
+.dialog-header,
+[class*="modal-header"] {
+  background-color: #141414 !important;
+  border-bottom: 1px solid #2a2a2a !important;
+  color: #ffffff !important;
+}
+
+.modal-footer,
+[class*="modal-footer"] {
+  background-color: #141414 !important;
+  border-top: 1px solid #2a2a2a !important;
+}
+
+/* Dropdown menus */
+.dropdown-menu,
+[class*="dropdown"],
+[class*="Dropdown"] {
+  background-color: #1e1e1e !important;
+  border: 1px solid #333333 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dropdown-menu li a,
+[class*="dropdown"] a {
+  color: #cccccc !important;
+  padding: 8px 16px !important;
+}
+
+.dropdown-menu li a:hover,
+[class*="dropdown"] a:hover {
+  background-color: #2a2a2a !important;
+  color: #ffffff !important;
+}
+
+/* =========================================================================
+   16. RESPONSIVE ADJUSTMENTS
+   ========================================================================= */
+
+@media (max-width: 768px) {
+  .sm-nav,
+  nav {
+    background-color: #0d0d0d !important;
+    border-bottom: 1px solid #2a2a2a !important;
+  }
+
+  .sm-tile,
+  .tile,
+  .gallery-item {
+    border: none !important;
+    margin-bottom: 2px !important;
+  }
+}
+
+/* =========================================================================
+   17. SCROLLBAR (WebKit)
+   ========================================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #444444;
+  border-radius: 4px;
+  border: 2px solid #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #666666;
+}
+
+/* =========================================================================
+   18. SELECTION HIGHLIGHT
+   ========================================================================= */
+
+::selection {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
