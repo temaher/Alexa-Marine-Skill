@@ -2,18 +2,34 @@
   "askcliStatesVersion": "2020-03-31",
   "profiles": {
     "default": {
-      "skillId": "",
+      "skillId": "amzn1.ask.skill.a16472ec-0a86-42cc-9566-e56a37e72567",
       "skillMetadata": {
-        "lastDeployHash": "",
-        "lastImportId": "amzn1.ask-package.import.7bb6ad85-8c59-47cc-a604-8faf82341228",
-        "lastImportTimestamp": "2026-03-04T05:11:14.880Z"
+        "lastDeployHash": "0c6g0qBPjMS3s6nsspbqe1eJGaw=",
+        "lastImportId": "amzn1.ask-package.import.c32c5f9f-8145-4067-9498-6fc872ead0df",
+        "lastImportTimestamp": "2026-03-08T01:30:34.303Z",
+        "lastDeployType": "interaction-model"
       },
       "code": {
         "default": {
-          "lastDeployHash": ""
-        }
+          "lastDeployHash": "OyH9nW3vkIyWJpdtlnrXF3myGxk="
+        },
+        "lastDeployTimestamp": "2026-03-08T01:36:00.467Z"
       },
-      "deploymentStatus": "COMPLETE"
+      "deploymentStatus": "COMPLETE",
+      "skillInfrastructure": {
+        "@ask-cli/lambda-deployer": {
+          "deployState": {
+            "default": {
+              "lambda": {
+                "arn": "arn:aws:lambda:us-east-1:668694612468:function:ask-alexa-marine-skill",
+                "lastModified": "2026-03-08T01:35:51.749+0000",
+                "revisionId": "c740bbd8-de91-47de-aa73-e59dfb5f239f"
+              },
+              "iamRole": "arn:aws:iam::668694612468:role/ask-lambda-MarineSkill-1772933747327"
+            }
+          }
+        }
+      }
     }
   }
 }

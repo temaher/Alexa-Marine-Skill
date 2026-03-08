@@ -35,7 +35,7 @@
     "apis": {
       "custom": {
         "endpoint": {
-          "uri": ""
+          "uri": "arn:aws:lambda:us-east-1:668694612468:function:ask-alexa-marine-skill"
         },
         "interfaces": []
       }
